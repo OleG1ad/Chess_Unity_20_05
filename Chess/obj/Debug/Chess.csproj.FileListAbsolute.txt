@@ -1,0 +1,6 @@
+F:\Unity\Chess\Chess\Chess\bin\Debug\Chess.dll
+F:\Unity\Chess\Chess\Chess\bin\Debug\Chess.pdb
+F:\Unity\Chess\Chess\Chess\obj\Debug\Chess.csprojAssemblyReference.cache
+F:\Unity\Chess\Chess\Chess\obj\Debug\Chess.csproj.CoreCompileInputs.cache
+F:\Unity\Chess\Chess\Chess\obj\Debug\Chess.dll
+F:\Unity\Chess\Chess\Chess\obj\Debug\Chess.pdb
