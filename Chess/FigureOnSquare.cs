@@ -8,8 +8,8 @@ namespace Chess
 {
     class FigureOnSquare //Фигура на клетке
     {
-        public Figure figure { get, private set; }
-        public Square square { get, private set; }
+        public Figure figure { get; private set; }
+        public Square square { get; private set; }
 
         //Контейнер для фигур без вспомогательных методов
         public FigureOnSquare (Figure figure, Square square)

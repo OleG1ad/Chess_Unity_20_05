@@ -8,44 +8,66 @@ namespace Chess
 {
     class Board
     {
-        public string fen { get, private set; } //Сохраняем фен, чтоб могли к нему обращаться
-        Figure[,] figures; // Массив всех фигур, где какая находится
-        public Color moveColor { get, private set; } //Цвет чей ход
-        public int moveNumber { get, private set; } // Номер хода, увеличивается после каждого хода черных
+        //Сохраняем фен, чтоб могли к нему обращаться
+        public string fen { get; private set; } 
+        // Массив всех фигур, где какая находится
+        Figure[,] figures; 
+        //Цвет чей ход
+        public Color moveColor { get; private set; } 
+        // Номер хода, увеличивается после каждого хода черных
+        public int moveNumber { get; private set; } 
 
-        public Board(string fen) // Конструктор который примет строчку фен, сохранит ее, распарсит
+        // Конструктор который примет строчку фен, сохранит ее, распарсит
+        public Board(string fen) 
         {
-            this.fen = fen; // принимаем строчку фен
-
-            figures = new Figure[8, 8]; //конструктор создает новую матрицу из всех всех фигур
+            // принимаем строчку фен
+            this.fen = fen; 
+            //конструктор создает новую матрицу из всех всех фигур
+            figures = new Figure[8, 8]; 
             Init(); // вызов метода
         }
-
-        void Init() // Метод смотрит на фен и инициализирует располдожение всех фигур
+        // Метод смотрит на фен и инициализирует располдожение всех фигур
+        void Init() 
         {
-            SetFigureAt(new Square("a1"), Figure.whiteKing); // вместо парсинга фена устанавливаем королей, с созданием клетки для каждой координаты
+            // вместо парсинга фена устанавливаем королей, с созданием клетки для каждой координаты
+            SetFigureAt(new Square("a1"), Figure.whiteKing); 
             SetFigureAt(new Square("h8"), Figure.blackKing);
             moveColor = Color.white; // первые ходят белые
         }
 
         public Figure GetFigureAt(Square square)
         {
-            if (square.OnBoard()) // проверяем находится ли фигура на доске
-                return figures[square.x, square.y]; // только в этом месте указываем координаты
+            // проверяем находится ли фигура на доске
+            if (square.OnBoard()) 
+                // только в этом месте указываем координаты
+                return figures[square.x, square.y]; 
             return Figure.none; // если за доской
         }
 
-        void SetFigureAt(Square square. Figure figure) // метод для установки фигур, имутобл, выполняется при создании нового хода
+        // метод для установки фигур, имутобл, выполняется при создании нового хода
+        void SetFigureAt(Square square, Figure figure) 
         {
             if (square.OnBoard()) // на доске?
-                figure[square.x, square.y] = figure; // записываем фигуру
+                // записываем фигуру
+                figures[square.x, square.y] = figure; 
         }
 
-        public Board Move(FigureMoving)
+        //метод реализующий ход
+        public Board Move(FigureMoving fm)
         {
-            Board next = new Board(fen)
+            //создаем новую доску на основе фен
+            Board next = new Board(fen);
+            //откуда пошла будет пусто
             next.SetFigureAt(fm.from, Figure.none);
+            //куда пошла, если превратилась тогда новая фигура, если нет тогда фигура
             next.SetFigureAt(fm.to, fm.promotion == Figure.none ? fm.figure : fm.promotion);
+            // если черный
+            if (moveColor == Color.black)
+                // увеличиваем номер хода на один
+                next.moveNumber++;
+            // переключаем цвет для хода следующего игрока
+            next.moveColor = moveColor.FlipColor();
+            return next;
         }
     }
 }

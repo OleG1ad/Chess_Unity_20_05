@@ -11,8 +11,8 @@ namespace Chess
         // Константа когда данные не коректны после проверки
         public static Square none = new Square(-1, -1);
 
-        public int x { get, private set; }
-        public int y { get, private set; }
+        public int x { get; private set; }
+        public int y { get; private set; }
         // Создание координаты по двум числам
         public Square (int x, int y)
         {
